@@ -1,9 +1,33 @@
-# Migration of a Database Engine: From C to C++ 
+# Migration of a Database Engine: From C to C++
 
-Bu proje, C dilinde **Linked List**  ve **Binary File I/O** kullanılarak geliştirilmiş, dinamik bir stok yönetim veritabanı motorudur.
+Bu proje, temel bir veritabanı motorunun **Prosedürel C** dilinden **Modern Nesne Yönelimli C++** diline olan göç (migration) sürecini sergiler. 
 
-##  Özellikler
-- **Dinamik Bellek Yönetimi:** `malloc` ve `free` ile çalışma anında bellek tahsisi.
-- **Kalıcı Depolama:** Verileri ikili (binary) formatta `.bin` dosyasına kaydeder ve geri yükler.
-- **Güvenli Giriş Sistemi:** `fgets` ve `strtol` ile buffer overflow hataları engellenmiştir.
-- **CRUD Operasyonları:** Veri ekleme, silme, listeleme ve dosya yönetimi.
+##  Projenin Amacı
+Aynı işlevselliği iki farklı dilde geliştirerek aralarındaki mimari farkları, bellek yönetimini ve modern yazılım pratiklerini (Modern C++) karşılaştırmalı olarak göstermek.
+
+---
+
+##  Teknik Karşılaştırma
+
+| Özellik | C Versiyonu (Procedural) | C++ Versiyonu (Modern OOP) |
+| :--- | :--- | :--- |
+| **Veri Yapısı** | Singly Linked List (Manuel) | `std::vector` (STL Container) |
+| **Bellek Yönetimi** | `malloc`, `free` | Otomatik (RAII) & `new`/`delete` |
+| **Giriş/Çıkış** | `scanf`, `fwrite` (Binary) | `fstream`, Operator Overloading (Text) |
+| **Silme Mantığı** | Manuel Pointer manipülasyonu | `std::remove_if` (Lambda Expression) |
+
+---
+
+##  Klasör Yapısı
+
+- **/C_Core**: İşaretçi tabanlı, bağlı liste kullanılan çekirdek kodlar.
+- **/CPP_Modern**: Vektörler, sınıflar ve lambda fonksiyonları kullanılan modern implementasyon.
+
+##  Nasıl Çalıştırılır?
+Her iki versiyon da standart bir C/C++ derleyicisi (GCC/Clang/MSVC) ile derlenebilir:
+```bash
+# C Versiyonu için:
+gcc C_Core/main.c -o c_database
+
+# C++ Versiyonu için:
+g++ CPP_Modern/main.cpp -o cpp_database
